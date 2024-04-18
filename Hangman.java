@@ -1,17 +1,23 @@
 import java.util.*;
+import java.lang.*;
 //import doodlepad.*;
+import java.io.File;  // Import the File class
+import java.io.FileNotFoundException;  // Import this class to handle errors
+import java.util.Scanner; // Import the Scanner class to read text files
 
 public class Hangman
 {
     Scanner scan = new Scanner(System.in);
     String[] parts = {"Head", "Right Arm", "Left Arm", "Left Leg", "Right Leg"};
+    String[] words = {"Water", "Proxy", "Words", "Spite", "Douma"};
+    String[] temp = new String[5];
     ArrayList<String> humanParts = new ArrayList<String>(Arrays.asList(parts));
     String term;
     String process;
     String hint;
-    public Hangman(String initHint)
+    public Hangman(int initRandom)
     {
-        hint = initHint;
+        //hint = Math.random();
     }
     public void answer() // the method that gets the word itself
     {
@@ -39,9 +45,21 @@ public class Hangman
     }
     public static void main(String[] args)
     {
-        Hangman h1 = new Hangman("Fast Food"); 
-        h1.answer();
-        h1.guess();
+        try {
+            File myObj = new File("filename.txt");
+            Scanner myReader = new Scanner(myObj);
+            while (myReader.hasNextLine()) {
+              String data = myReader.nextLine();
+              System.out.println(data);
+            }
+            myReader.close();
+          } catch (FileNotFoundException e) {
+            System.out.println("An error occurred.");
+            e.printStackTrace();
+          }
+        //Hangman h1 = new Hangman(); 
+        //h1.answer();
+        //h1.guess();
     }
     
 }
