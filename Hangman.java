@@ -1,65 +1,63 @@
 import java.util.*;
 import java.lang.*;
-//import doodlepad.*;
+import doodlepad.*;
 import java.io.File;  // Import the File class
 import java.io.FileNotFoundException;  // Import this class to handle errors
 import java.util.Scanner; // Import the Scanner class to read text files
 
 public class Hangman
 {
+    static String letter;
     Scanner scan = new Scanner(System.in);
     String[] parts = {"Head", "Right Arm", "Left Arm", "Left Leg", "Right Leg"};
-    String[] words = {"Water", "Proxy", "Words", "Spite", "Douma"};
-    String[] temp = new String[5];
+    static String[] words = {"Tiger", "Penguin", "Chipmunk", "Gazelle", "Capybara", "Skunk"};
+    String[] temp = new String[6];
+    static String answer;
     ArrayList<String> humanParts = new ArrayList<String>(Arrays.asList(parts));
     String term;
+
     String process;
     String hint;
     public Hangman(int initRandom)
     {
         //hint = Math.random();
     }
-    public void answer() // the method that gets the word itself
+    public String answer() // the method that gets the word itself
     {
-        System.out.println("What would like the answer to be for this hangman, based off the hint being " + hint + "?");
-        term = scan.nextLine();
+        int randIndex = (int)(Math.random() * 6);
+        answer = words[randIndex];
+        return answer;
     }
 
-    public void guess()
+    public String guess()
     {
-        System.out.println("What letter would you like to guess? : ");
-        String letter = (scan.nextLine());
-        letter.toLowerCase();
-        //char guess = letter.charAt(0);
-        for(int i = 0; i < term.length(); i++ )
+        String placeholders = "";
+        String empty = "";
+        for(int i = 0; i < answer.length(); i++)
         {
-            if(letter.substring(i,i+1).equals(term.substring(i, i+1)))
+            placeholders += "_";
+        }
+        System.out.print(placeholders);
+        //System.out.println("What letter would you like to guess? : ");
+        //String letter = (scan.nextLine());
+        //letter.toLowerCase();
+        //char guess = letter.charAt(0);
+        return empty;
+    }
+
+    public void attempt()
+    {
+        System.out.println("What letter would you like to guess");
+        letter = scan.nextLine();
+        for(int g = 0; g < placeholders.length(); g++)
+        {
+            if(letter.equals(answer.substring(g, g+1)))
             {
-                System.out.println(process.substring(i,i+1));
+                placeholders.substring(g, g+1) = letter;
             }
-            else
-            {
-                humanParts.remove(0);
-            }
+            System.out.println(placeholders)
         }
     }
-    public static void main(String[] args)
-    {
-        try {
-            File myObj = new File("filename.txt");
-            Scanner myReader = new Scanner(myObj);
-            while (myReader.hasNextLine()) {
-              String data = myReader.nextLine();
-              System.out.println(data);
-            }
-            myReader.close();
-          } catch (FileNotFoundException e) {
-            System.out.println("An error occurred.");
-            e.printStackTrace();
-          }
-        //Hangman h1 = new Hangman(); 
-        //h1.answer();
-        //h1.guess();
-    }
+    
     
 }

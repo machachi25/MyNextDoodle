@@ -15,7 +15,7 @@ public class Clue {
     public void readFile()
     {
         try {
-            File myObj = new File("filename.txt");
+            File myObj = new File("list.txt");
             Scanner myReader = new Scanner(myObj);
             while (myReader.hasNextLine()) {
               String data = myReader.nextLine();
